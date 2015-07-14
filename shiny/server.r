@@ -14,7 +14,6 @@ library('boot')
 # Load the data
 # Don't use data.table; this set is tiny!
 # Import data
-setwd("C:\\Users\\David Sanchez\\dev\\bats");
 data = read.csv("simplified_export3.csv");
 data = data[1:33,];
 

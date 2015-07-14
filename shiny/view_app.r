@@ -6,5 +6,5 @@ library('shiny');
 setwd("C:\\Users\\David Sanchez\\dev\\bats");
 
 # Run the app in the current directory
-runApp(".")
+runApp(".\\shiny/")
 
