@@ -1,2 +1,2 @@
 # batStats
-Bat statistics
+Some basic distributional statistics about bats
