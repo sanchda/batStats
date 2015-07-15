@@ -114,8 +114,8 @@ abline(females.lm,  col="red")
 ###############################################################################
 #                    BOX AND WHISKER PLOTS (Male vs Female)
 ###############################################################################
-ggplot(physData, aes_string(x="sex", y="BUN")) +
-  ggtitle(sprintf("%s between male and female bats.","BUN")) +
+ggplot(physData, aes_string(x="sex", y="BMI")) +
+  ggtitle(sprintf("%s of male and female bats","BMI")) +
   geom_boxplot(outlier.size=0, alpha=0.2) +
   coord_flip() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
