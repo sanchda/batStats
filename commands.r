@@ -167,7 +167,13 @@ ggplot(thisData, aes(x=sex, y=quant, fill=Habitat)) +
   ggtitle(thisVar) +
   scale_y_continuous(breaks=0:20*4) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
-  theme_bw()
+  theme_bw() +
+  theme(plot.title   = element_text(size=rel(5), face="bold")) +
+  theme(axis.title   = element_text(size=rel(3), face="bold")) +
+  theme(axis.text    = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(axis.ticks   = element_line(size=rel(2), colour = "black")) +
+  theme(legend.title = element_text(size=rel(3))) +
+  theme(legend.text  = element_text(size=rel(2)))
 
 
 
@@ -195,7 +201,13 @@ ggplot(thisData, aes(x=Habitat, y=quant, fill=sex)) +
   ggtitle(thisVar) +
   scale_y_continuous(breaks=0:20*4) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
-  theme_bw()
+  theme_bw() +
+  theme(plot.title   = element_text(size=rel(5), face="bold")) +
+  theme(axis.title   = element_text(size=rel(3), face="bold")) +
+  theme(axis.text    = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(axis.ticks   = element_line(size=rel(2), colour = "black")) +
+  theme(legend.title = element_text(size=rel(3))) +
+  theme(legend.text  = element_text(size=rel(2)))
 
 
 ###############################################################################
@@ -222,7 +234,13 @@ ggplot(thisData, aes(x=sex, y=quant, fill=sex)) +
   ggtitle(thisVar) +
   scale_y_continuous(breaks=0:20*4) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
-  theme_bw()
+  theme_bw() +
+  theme(plot.title   = element_text(size=rel(5), face="bold")) +
+  theme(axis.title   = element_text(size=rel(3), face="bold")) +
+  theme(axis.text    = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(axis.ticks   = element_line(size=rel(2), colour = "black")) +
+  theme(legend.title = element_text(size=rel(3))) +
+  theme(legend.text  = element_text(size=rel(2)))
 
 
 ###############################################################################
@@ -249,6 +267,12 @@ ggplot(thisData, aes(x=Habitat, y=quant, fill=Habitat)) +
   ggtitle(thisVar) +
   scale_y_continuous(breaks=0:20*4) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
-  theme_bw()
+  theme_bw() +
+  theme(plot.title   = element_text(size=rel(5), face="bold")) +
+  theme(axis.title   = element_text(size=rel(3), face="bold")) +
+  theme(axis.text    = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(axis.ticks   = element_line(size=rel(2), colour = "black")) +
+  theme(legend.title = element_text(size=rel(3))) +
+  theme(legend.text  = element_text(size=rel(2)))
 
 
