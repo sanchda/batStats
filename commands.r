@@ -120,7 +120,10 @@ ggplot(physData, aes_string(x="sex", y="BMI")) +
   coord_flip() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  theme(plot.title = element_text(lineheight=.8, face="bold"))
+  theme(plot.title = element_text(size=rel(5), face="bold")) +
+  theme(axis.title = element_text(size=rel(3), face="bold")) +
+  theme(axis.text  = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(axis.ticks = element_line(size=rel(2), colour = "black"))
 
 
 ###############################################################################
@@ -134,7 +137,10 @@ ggplot(physData, aes_string(x="Habitat", y=thisVar)) +
   coord_flip() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  theme(plot.title = element_text(lineheight=.8, face="bold"))
+  theme(plot.title = element_text(size=rel(5), face="bold")) +
+  theme(axis.title = element_text(size=rel(3), face="bold")) +
+  theme(axis.text  = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(axis.ticks = element_line(size=rel(2), colour = "black"))
 
 
 ###############################################################################
