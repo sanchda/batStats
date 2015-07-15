@@ -114,42 +114,44 @@ abline(females.lm,  col="red")
 ###############################################################################
 #                    BOX AND WHISKER PLOTS (Male vs Female)
 ###############################################################################
-ggplot(physData, aes_string(x="sex", y="BMI")) +
-  ggtitle(sprintf("%s of male and female bats","BMI")) +
+ggplot(physData, aes_string(x="sex", y="Glu")) +
+  ggtitle(sprintf("%s of male and female bats","Glucose")) +
   geom_boxplot(outlier.size=0, alpha=0.2) +
   coord_flip() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  theme(plot.title = element_text(size=rel(5), face="bold")) +
-  theme(axis.title = element_text(size=rel(3), face="bold")) +
-  theme(axis.text  = element_text(size=rel(2), face="bold", colour="blue")) +
-  theme(axis.ticks = element_line(size=rel(2), colour = "black"))
+  theme(plot.title = element_text(size=rel(2.5), face="bold")) +
+  theme(axis.title = element_text(size=rel(2), face="bold")) +
+  theme(axis.text  = element_text(size=rel(1.2), face="bold", colour="blue")) +
+  theme(axis.ticks = element_line(size=rel(1.2), colour = "black"))
 
 
 ###############################################################################
 #                    BOX AND WHISKER PLOTS (Disturbed and Undisturbed)
 ###############################################################################
 # Only need to change this line.
-thisVar = "pH";
+thisVar = "Hb_star";
 ggplot(physData, aes_string(x="Habitat", y=thisVar)) +
-  ggtitle(sprintf("%s between disturbed and undisturbed bats.",thisVar)) +
+  ggtitle(sprintf("Hb* of bats from different habitats",thisVar)) +
   geom_boxplot(outlier.size=0, alpha=0.2) +
   coord_flip() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  theme(plot.title = element_text(size=rel(5), face="bold")) +
-  theme(axis.title = element_text(size=rel(3), face="bold")) +
-  theme(axis.text  = element_text(size=rel(2), face="bold", colour="blue")) +
-  theme(axis.ticks = element_line(size=rel(2), colour = "black"))
+  theme(plot.title = element_text(size=rel(2.5), face="bold")) +
+  theme(axis.title = element_text(size=rel(2), face="bold")) +
+  theme(axis.text  = element_text(size=rel(1.2), face="bold", colour="blue")) +
+  theme(axis.ticks = element_line(size=rel(1.2), colour = "black"))
 
 
 ###############################################################################
 #                   BAR CHART WITH STANDARD ERROR (Male vs Female)
 ###############################################################################
 # Only need to change this line.
-thisVar = "Cl";
+thisVar = "Na";
 thisData = summarySE(physData, measurevar=thisVar, groupvars=c("sex","Habitat"))
 thisData$quant = thisData[, thisVar];
+theseBreaks = seq( min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se), length.out=6);
+theseLabels = sprintf("%.2f",theseBreaks );
 
 ggplot(thisData, aes(x=sex, y=quant, fill=Habitat)) + 
   geom_bar(position=position_dodge(), stat="identity",
@@ -160,19 +162,19 @@ ggplot(thisData, aes(x=sex, y=quant, fill=Habitat)) +
                 width=.2,
                 position=position_dodge(.9)) +
   xlab("Sex") +
-  ylab("Quantity") +
+  ylab(thisVar) +
   scale_fill_hue(name="Habitat type", # Legend label, use darker colors
                  breaks=c("disturbed", "undisturbed"),
                  labels=c("Disturbed", "Undisturbed")) +
-  ggtitle(thisVar) +
-  scale_y_continuous(breaks=0:20*4) +
+  ggtitle(paste("Mean ", thisVar, " with standard error", sep="") ) +
+  scale_y_continuous(breaks=theseBreaks, labels=theseLabels  ) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
   theme_bw() +
-  theme(plot.title   = element_text(size=rel(5), face="bold")) +
-  theme(axis.title   = element_text(size=rel(3), face="bold")) +
-  theme(axis.text    = element_text(size=rel(2), face="bold", colour="blue")) +
+  theme(plot.title   = element_text(size=rel(2), face="bold")) +
+  theme(axis.title   = element_text(size=rel(1.5), face="bold")) +
+  theme(axis.text    = element_text(size=rel(1.5), face="bold", colour="blue")) +
   theme(axis.ticks   = element_line(size=rel(2), colour = "black")) +
-  theme(legend.title = element_text(size=rel(3))) +
+  theme(legend.title = element_text(size=rel(2))) +
   theme(legend.text  = element_text(size=rel(2)))
 
 
@@ -184,6 +186,8 @@ ggplot(thisData, aes(x=sex, y=quant, fill=Habitat)) +
 thisVar = "BUN";
 thisData = summarySE(physData, measurevar=thisVar, groupvars=c("sex","Habitat"))
 thisData$quant = thisData[, thisVar];
+theseBreaks = seq( min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se), length.out=6);
+theseLabels = sprintf("%.2f",theseBreaks );
 
 ggplot(thisData, aes(x=Habitat, y=quant, fill=sex)) + 
   geom_bar(position=position_dodge(), stat="identity",
@@ -194,12 +198,12 @@ ggplot(thisData, aes(x=Habitat, y=quant, fill=sex)) +
                 width=.2,
                 position=position_dodge(.9)) +
   xlab("Sex") +
-  ylab("Quantity") +
+  ylab(thisVar) +
   scale_fill_hue(name="Sex", # Legend label, use darker colors
                  breaks=c("male", "female"),
                  labels=c("Male", "Female")) +
-  ggtitle(thisVar) +
-  scale_y_continuous(breaks=0:20*4) +
+  ggtitle(paste("Mean ", thisVar, " with standard error", sep="") ) +
+  scale_y_continuous(breaks=theseBreaks, labels=theseLabels  ) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
   theme_bw() +
   theme(plot.title   = element_text(size=rel(5), face="bold")) +
@@ -214,9 +218,11 @@ ggplot(thisData, aes(x=Habitat, y=quant, fill=sex)) +
 #                   BAR CHART WITH STANDARD ERROR (ONLY male v.s. female)
 ###############################################################################
 # Only need to change this line.
-thisVar = "Cl";
+thisVar = "BMI";
 thisData = summarySE(physData, measurevar=thisVar, groupvars=c("sex"))
 thisData$quant = thisData[, thisVar];
+theseBreaks = seq( min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se), length.out=6);
+theseLabels = sprintf("%.2f",theseBreaks );
 
 ggplot(thisData, aes(x=sex, y=quant, fill=sex)) + 
   geom_bar(position=position_dodge(), stat="identity",
@@ -227,19 +233,19 @@ ggplot(thisData, aes(x=sex, y=quant, fill=sex)) +
                 width=.2,
                 position=position_dodge(.9)) +
   xlab("Sex") +
-  ylab("Quantity") +
+  ylab(thisVar) +
   scale_fill_hue(name="Sex", # Legend label, use darker colors
                  breaks=c("male", "female"),
                  labels=c("Male", "Female")) +
-  ggtitle(thisVar) +
-  scale_y_continuous(breaks=0:20*4) +
+  ggtitle(paste("Mean ", thisVar, " with standard error", sep="") ) +
+  scale_y_continuous(breaks=theseBreaks, labels=theseLabels  ) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
   theme_bw() +
-  theme(plot.title   = element_text(size=rel(5), face="bold")) +
-  theme(axis.title   = element_text(size=rel(3), face="bold")) +
-  theme(axis.text    = element_text(size=rel(2), face="bold", colour="blue")) +
-  theme(axis.ticks   = element_line(size=rel(2), colour = "black")) +
-  theme(legend.title = element_text(size=rel(3))) +
+  theme(plot.title   = element_text(size=rel(2), face="bold")) +
+  theme(axis.title   = element_text(size=rel(2), face="bold")) +
+  theme(axis.text    = element_text(size=rel(1), face="bold")) +
+  theme(axis.ticks   = element_line(size=rel(1), colour = "black")) +
+  theme(legend.title = element_text(size=rel(2))) +
   theme(legend.text  = element_text(size=rel(2)))
 
 
@@ -250,6 +256,8 @@ ggplot(thisData, aes(x=sex, y=quant, fill=sex)) +
 thisVar = "BUN";
 thisData = summarySE(physData, measurevar=thisVar, groupvars=c("Habitat"))
 thisData$quant = thisData[, thisVar];
+theseBreaks = seq( min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se), length.out=6);
+theseLabels = sprintf("%.2f",theseBreaks );
 
 ggplot(thisData, aes(x=Habitat, y=quant, fill=Habitat)) + 
   geom_bar(position=position_dodge(), stat="identity",
@@ -260,12 +268,12 @@ ggplot(thisData, aes(x=Habitat, y=quant, fill=Habitat)) +
                 width=.2,
                 position=position_dodge(.9)) +
   xlab("Sex") +
-  ylab("Quantity") +
+  ylab(thisVar) +
   scale_fill_hue(name="Habitat type", # Legend label, use darker colors
                  breaks=c("disturbed", "undisturbed"),
                  labels=c("Disturbed", "Undisturbed")) +
-  ggtitle(thisVar) +
-  scale_y_continuous(breaks=0:20*4) +
+  ggtitle(paste("Mean ", thisVar, " with standard error", sep="") ) +
+  scale_y_continuous(breaks=theseBreaks, labels=theseLabels  ) +
   coord_cartesian(ylim=c(min(thisData$quant - 1.1*thisData$se), max(thisData$quant + 1.1*thisData$se) ) ) +
   theme_bw() +
   theme(plot.title   = element_text(size=rel(5), face="bold")) +
